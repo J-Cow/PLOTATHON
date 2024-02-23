@@ -6,8 +6,12 @@ date: "2024-02-23"
 
 ## Import from dataset
 
+
+
 ```{r setup, include=FALSE}
 data <- read_csv('Yelp_Academic_Dataset_-_Select_CA_Cities_&_Businesses.csv',show_col_types = FALSE)
+
+library(ggplot2)
 ```
 
 ll as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
@@ -20,8 +24,7 @@ summary(data)
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+```{r , echo=FALSE}
+ggplot2(```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
