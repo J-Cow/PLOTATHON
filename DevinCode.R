@@ -20,14 +20,18 @@ mapview(sf_LatLong, map.types = "CartoDB.DarkMatter", zcol="Stars")
 ## New Section
 ##  Working on hotels
 
+Hotels <- read.csv("Hotels.csv")
 
-data |> filter(`Review Count` < 2000) |> 
-ggplot(aes(`Stars`, `Review Count`)) + 
+Hotels |> 
+ggplot(aes(`Stars`, Review.Count)) + 
   geom_col()
 
-data |> drop_na(`Noise Level`) |> filter(`Review Count` < 2000) |> 
-  ggplot(aes(`Noise Level`, WeightedStar)) + 
+Hotels |> drop_na(Noise.Level) |> 
+  ggplot(aes(, WeightedStar)) + 
   geom_col()
+
+sf_Hotels <- st_as_sf(Hotels, coords = c("Longitude", "Latitude"),  crs = 4326)
+mapview(sf_Hotels, map.types = "CartoDB.DarkMatter", zcol="Stars") 
 
 
 
