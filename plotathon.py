@@ -1,16 +1,27 @@
 import pandas as pd
 
-# Read the CSV file into a DataFrame
-df = pd.read_csv("Datasheet.csv")
+# Load the CSV file into a DataFrame
+try:
+    df = pd.read_csv("Datasheet.csv", encoding='utf-8')
+except UnicodeDecodeError:
+    df = pd.read_csv("Datasheet.csv", encoding='latin-1')
 
 
-print(df.head())
+# Drop non-numeric columns
+bool_columns = df.select_dtypes(include=['bool']).columns
+numeric_columns = df.select_dtypes(include=['float64', 'int64']).columns
+df_numeric = df[numeric_columns]
 
-# Specify the category based on which you want to remove empty cells
-#category = 'Name'
+# Display the first few rows of the DataFrame to understand its structure
+print(df_numeric.head())
 
-# Remove rows with empty cells in the specified category
-#cleaned_df = df.dropna(subset=[category])
+# Check for any missing values in the DataFrame
+print(df_numeric.isnull().sum())
 
-# Write the cleaned DataFrame back to a CSV file
-#cleaned_df.to_csv("cleaned_dataset.csv", index=False)
+# If there are missing values, handle them appropriately (e.g., fill with mean/median, drop rows, etc.)
+
+# Calculate correlation matrix
+correlation_matrix = df_numeric.corr()
+
+# Display the correlation matrix
+print(correlation_matrix)
