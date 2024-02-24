@@ -49,15 +49,10 @@ summary(df1)
 ll as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r data}
-counts <- table(df1$'Good For Kids', df1$Stars)
-barplot(counts, main="hiiii",
-  xlab="byyyyyeee", col=c("darkblue","red"),
-  legend = rownames(counts))
+newdf <- df %>% select(where(is.numeric))
+newdf <- na.omit(newdf)
 
-counts <- table(df1$'Good For Kids', df1$Stars)
-barplot(counts, main="hiiii",
-  xlab="byyyyyeee", col=c("darkblue","red"),
-  legend = rownames(counts))
+cor(newdf)
 ```
 
 Devin Working
