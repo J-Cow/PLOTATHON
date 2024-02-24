@@ -20,7 +20,12 @@ mapview(sf_LatLong, map.types = "CartoDB.DarkMatter", zcol="Stars")
 ## New Section
 ##  Working on hotels
 
-
+for (i in 1:4013) {
+  if (grepl( "Hotels", data[i,11], fixed = TRUE)) {
+    print(TRUE)
+  }
+  
+}
 
 
 
