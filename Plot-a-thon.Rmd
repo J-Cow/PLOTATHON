@@ -11,10 +11,12 @@ library(tidyverse)
 
 data <- read_csv('Datasheet.csv', show_col_types = FALSE)
 
-summary(data)
-data2 <- distinct(data)
-missing_values <- colSums(is.na(data))
-data2 <- na.omit(data)
+#summary(data)
+#data2 <- distinct(data)
+#missing_values <- colSums(is.na(data))
+#data2 <- na.omit(data)
+
+data <- mutate(data,WeightedStar = `Review Count` * `Stars`)
 
 MISSING <- is.na(data$"Good For Kids")
 
@@ -53,11 +55,14 @@ newdf <- na.omit(newdf)
 cor(newdf)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r , echo=FALSE}
-ggplot2(
+```{r}
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+```
+
+
+

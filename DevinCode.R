@@ -18,7 +18,7 @@ mapview(sf_LatLong, map.types = "CartoDB.DarkMatter", zcol="Stars")
 
 ##
 ## New Section
-##  Working on correlation
+##  Working on hotels
 
 
 
