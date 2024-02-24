@@ -16,6 +16,8 @@ data <- read_csv('Datasheet.csv', show_col_types = FALSE)
 #missing_values <- colSums(is.na(data))
 #data2 <- na.omit(data)
 
+data <- mutate(data,WeightedStar = `Review Count` * `Stars`)
+
 MISSING <- is.na(data$"Good For Kids")
 
 df<-data[!grepl("Beach", data$Categories),]
