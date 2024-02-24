@@ -3,6 +3,7 @@ library(sf) # For reading map based data
 library(mapview) # for viewing map based data
 library(readr) # for reading files
 library(geosphere) # For doing map distance
+library(ThemePark)
 
 # Getting data into R
 YelpData <- read_csv("Yelp Academic Dataset - Select CA Cities & Businesses.csv")
@@ -25,7 +26,13 @@ Hotels <- read.csv("Hotels.csv")
 
 Hotels |> 
 ggplot(aes(Stars, Review.Count)) + 
-  geom_col()
+  geom_col() +
+  theme_barbie()
+
+OriginalData |> 
+  ggplot(aes(Stars, Review.Count)) + 
+  geom_col() +
+  theme_barbie()
 
 Hotels |> drop_na(Noise.Level) |> 
   ggplot(aes(Noise.Level, Weighted.Star)) + 
