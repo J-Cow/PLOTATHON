@@ -6,20 +6,56 @@ date: "2024-02-23"
 
 ## Import from dataset
 
-
-
 ```{r setup, include=FALSE}
 library(tidyverse)
-library(mapview)
 
-data <- read_csv('Yelp Academic Dataset - Select CA Cities & Businesses.csv')
+data <- read_csv('Datasheet.csv', show_col_types = FALSE)
+
+summary(data)
+data2 <- distinct(data)
+missing_values <- colSums(is.na(data))
+data2 <- na.omit(data)
+
+MISSING <- is.na(data$"Good For Kids")
+
+df<-data[!grepl("Beach", data$Categories),]
+df<-df[!grepl("Park", df$Categories),]
+df<-df[!grepl("Hiking", df$Categories),]
+
+df1 <- data[complete.cases(data[['Good For Kids']]), ]
+
+column_to_parse <- df$Categories
+
+# Split the strings in the column by ", " to create a list of items
+split_items <- strsplit(column_to_parse, ", ")
+
+# Flatten the list to count the occurrences of each item
+all_items <- unlist(split_items)
+
+
+# Count the occurrences of each unique item in the column
+item_counts <- table(all_items)
+
+# Display the counts
+print(item_counts)
+
+
+summary(df1)
 
 ```
 
 ll as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r data}
-mapview(data, xcol = "Longitude", ycol = "Latitude", crs = 4269, grid = FALSE)
+counts <- table(df1$'Good For Kids', df1$Stars)
+barplot(counts, main="hiiii",
+  xlab="byyyyyeee", col=c("darkblue","red"),
+  legend = rownames(counts))
+
+counts <- table(df1$'Good For Kids', df1$Stars)
+barplot(counts, main="hiiii",
+  xlab="byyyyyeee", col=c("darkblue","red"),
+  legend = rownames(counts))
 ```
 
 ## Including Plots
