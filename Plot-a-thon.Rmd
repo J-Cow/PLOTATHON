@@ -49,17 +49,74 @@ summary(df1)
 ll as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r data}
-newdf <- df %>% select(where(is.numeric))
-newdf <- na.omit(newdf)
-
+pat <- "\\Hotel\\b"
+Hoteldf<-data[grepl("Hotel", data$Categories),]
+write.csv(Hoteldf, "Hotels.csv")
+newdf <- na.omit(Hoteldf)
+print(newdf)
 cor(newdf)
 ```
+```{r}
+library(stringr)
 
+substring_to_search <- "none"
+
+# Check if the substring_to_search is found in each element of column_to_modify
+substring_found <- str_detect(Hoteldf$"Wi Fi", substring_to_search)
+
+# Replace the cells in the column where the substring is found with 1, otherwise leave them unchanged
+Hoteldf$"Wi Fi"[substring_found] <- 1
+
+substring_to_search <- "no"
+
+# Check if the substring_to_search is found in each element of column_to_modify
+substring_found <- str_detect(Hoteldf$"Wi Fi", substring_to_search)
+
+# Replace the cells in the column where the substring is found with 1, otherwise leave them unchanged
+Hoteldf$"Wi Fi"[substring_found] <- 0
+
+substring_to_search <- "free"
+
+# Check if the substring_to_search is found in each element of column_to_modify
+substring_found <- str_detect(Hoteldf$"Wi Fi", substring_to_search)
+
+# Replace the cells in the column where the substring is found with 1, otherwise leave them unchanged
+Hoteldf$"Wi Fi"[substring_found] <- 1
+
+substring_to_search <- "paid"
+
+# Check if the substring_to_search is found in each element of column_to_modify
+substring_found <- str_detect(Hoteldf$"Wi Fi", substring_to_search)
+
+# Replace the cells in the column where the substring is found with 1, otherwise leave them unchanged
+Hoteldf$"Wi Fi"[substring_found] <- 1
+
+substring_to_search <- "TRUE"
+
+# Check if the substring_to_search is found in each element of column_to_modify
+substring_found <- str_detect(Hoteldf, substring_to_search)
+
+# Replace the cells in the column where the substring is found with 1, otherwise leave them unchanged
+Hoteldf[substring_found] <- 1
+
+substring_to_search <- "FALSE"
+
+# Check if the substring_to_search is found in each element of column_to_modify
+substring_found <- str_detect(Hoteldf, substring_to_search)
+
+# Replace the cells in the column where the substring is found with 1, otherwise leave them unchanged
+Hoteldf[substring_found] <- 0
+
+
+print(Hoteldf)
+cor(Hoteldf)
+
+```
 Devin Working
 
 ```{r}
 
-
+cor(Hoteldf)
 
 
 ```
