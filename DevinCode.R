@@ -23,7 +23,7 @@ mapview(sf_LatLong, map.types = "CartoDB.DarkMatter", zcol="Stars")
 ##  Working on hotels
 
 
-Hotels <- read.csv("Hotels.csv")
+Hotels <- read_csv("~/GitHub/PLOTATHON/Hotels.csv")
 
 Hotels |> 
 ggplot(aes(Stars, Review.Count)) + 
@@ -177,13 +177,30 @@ mapview(sf_df_DistFromHotelTop1, map.types = "CartoDB.DarkMatter",
   mapview(sf_df_DistFromHotelBot2, 
           zcol="Stars", legend = T) 
   
-df_DistFromHotelBot2 <- mutate(df_DistFromHotelBot2
-                  ,
+df_DistFromHotelTop2 <- mutate(df_DistFromHotelTop2,
                                Weighted.Stars = Stars * Review.Count)
 
+MeanWeights <- c()
+MeanWeights <- c(sum(df_DistFromHotelTop1$Weighted.Stars),
+                     sum(df_DistFromHotelTop2$Weighted.Stars),
+                     sum(df_DistFromHotelMid1$Weighted.Stars),
+                     sum(df_DistFromHotelMid2$Weighted.Stars),
+                     sum(df_DistFromHotelBot1$Weighted.Stars),
+                     sum(df_DistFromHotelBot2$Weighted.Stars))
+MeanWeights <- data.frame(MeanWeights)
 
-
-
-
-
+wk <- MeanWeights |> mutate(MeanWeights = round(MeanWeights), 
+                      id = c("Top1","Top2","Mid1","Mid2","Bot1","Bot2")) |> 
+  uncount(MeanWeights)
+ggplot(wk, aes(x =  id)) +
+  geom_bar(fill = "#ffc39a") + 
+  theme(panel.background = element_rect(fill = "#265a56"),
+        panel.grid.major = element_line(color = "black"),
+        panel.grid.minor = element_line(color = "black"),
+        plot.background = element_rect(fill = "black"),
+        axis.text = element_text(color = "white"),
+        title = element_text(color = "white")) +
+  labs(
+    title = "Weighted Stars of Each Hotel"
+  )
 
